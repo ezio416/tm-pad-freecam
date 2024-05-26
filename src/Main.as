@@ -6,28 +6,6 @@ const string title = "\\$FFF" + Icons::Gamepad + "\\$G Pad FreeCam";
 [Setting category="General" name="Enabled"]
 bool S_Enabled = true;
 
-CInputScriptPad@ GetPad() {
-    CTrackMania@ App = cast<CTrackMania@>(GetApp());
-
-    CInputPortDx8@ Port = cast<CInputPortDx8@>(App.InputPort);
-    if (Port is null || Port.Script_Pads.Length == 0)
-        return null;
-
-    for (uint i = 0; i < Port.Script_Pads.Length; i++) {
-        CInputScriptPad@ Pad = Port.Script_Pads[i];
-        if (
-            Pad is null
-            || Pad.Type == CInputScriptPad::EPadType::Keyboard
-            || Pad.Type == CInputScriptPad::EPadType::Mouse
-        )
-            continue;
-
-        return Pad;
-    }
-
-    return null;
-}
-
 void RenderMenu() {
     if (UI::MenuItem(title, "", S_Enabled))
         S_Enabled = !S_Enabled;
@@ -136,4 +114,26 @@ void Render() {
     //     Cam.m_FreeVal_Loc_Translation.y -= move_y;
     //     Cam.m_FreeVal_Loc_Translation.z -= move_z;
     // }
+}
+
+CInputScriptPad@ GetPad() {
+    CTrackMania@ App = cast<CTrackMania@>(GetApp());
+
+    CInputPortDx8@ Port = cast<CInputPortDx8@>(App.InputPort);
+    if (Port is null || Port.Script_Pads.Length == 0)
+        return null;
+
+    for (uint i = 0; i < Port.Script_Pads.Length; i++) {
+        CInputScriptPad@ Pad = Port.Script_Pads[i];
+        if (
+            Pad is null
+            || Pad.Type == CInputScriptPad::EPadType::Keyboard
+            || Pad.Type == CInputScriptPad::EPadType::Mouse
+        )
+            continue;
+
+        return Pad;
+    }
+
+    return null;
 }
