@@ -6,11 +6,6 @@ const string title = "\\$FFF" + Icons::Gamepad + "\\$G Pad FreeCam";
 [Setting category="General" name="Enabled"]
 bool S_Enabled = true;
 
-void RenderMenu() {
-    if (UI::MenuItem(title, "", S_Enabled))
-        S_Enabled = !S_Enabled;
-}
-
 void Render() {
     if (!S_Enabled)
         return;
@@ -114,6 +109,11 @@ void Render() {
     //     Cam.m_FreeVal_Loc_Translation.y -= move_y;
     //     Cam.m_FreeVal_Loc_Translation.z -= move_z;
     // }
+}
+
+void RenderMenu() {
+    if (UI::MenuItem(title, "", S_Enabled))
+        S_Enabled = !S_Enabled;
 }
 
 CInputScriptPad@ GetPad() {
