@@ -27,3 +27,6 @@ bool S_InvertY = false;
 
 [Setting category="General" name="Show debug windows"]
 bool S_Debug = false;
+
+[Setting category="General" name="Override game version check (unsafe)" description="If you don't want to wait for the plugin author to test the current game version, try this setting. \\$FA0It may crash your game."]
+bool S_OverrideCheck = false;

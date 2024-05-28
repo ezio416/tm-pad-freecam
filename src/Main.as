@@ -2,8 +2,18 @@
 // m 2024-05-28
 
 const float  halfPi = Math::PI * 0.5f;
-const string title  = "\\$FFF" + Icons::Gamepad + "\\$G Pad FreeCam";
+const string title  = "\\$F5F" + Icons::Gamepad + "\\$G Pad FreeCam";
 const float  twoPi  = Math::PI * 2.0f;
+
+void Main() {
+    versionSafe = GameVersionSafe();
+    S_OverrideCheck = false;
+}
+
+void OnSettingsChanged() {
+    if (S_OverrideCheck)
+        versionSafe = true;
+}
 
 void Render() {
     if (!S_Enabled)
@@ -83,7 +93,7 @@ void Render() {
 }
 
 void RenderMenu() {
-    if (UI::MenuItem(title, "", S_Enabled))
+    if (UI::MenuItem(title + (versionSafe ? "" : "\\$AAA (disabled" + (checkingApi ? ", checking..." : "") + ")"), "", S_Enabled, versionSafe))
         S_Enabled = !S_Enabled;
 }
 
