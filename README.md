@@ -1,4 +1,4 @@
-![Signed](https://img.shields.io/badge/Signed-No-FF3333)
+![Signed](https://img.shields.io/badge/Signed-Yes-00AA00)
 ![Number of downloads](https://img.shields.io/badge/dynamic/json?query=downloads&url=https%3A%2F%2Fopenplanet.dev%2Fapi%2Fplugin%2F554&label=Downloads&color=purple)
 ![Version](https://img.shields.io/badge/dynamic/json?query=version&url=https%3A%2F%2Fopenplanet.dev%2Fapi%2Fplugin%2F554&label=Version&color=red)
 ![Game Trackmania](https://img.shields.io/badge/Game-Trackmania-blue)
@@ -13,7 +13,6 @@ The left stick is used to move as you normally would with the keyboard (forward/
 
 There are configuration options such as swapping controls, setting a deadzone, setting the max speed, etc. with more coming in future updates.
 
-<!-- ![Signed](https://img.shields.io/badge/Signed-Yes-00AA00) -->
 <!-- ![Signed](https://img.shields.io/badge/Signed-School_Mode-CC1199) -->
 <!-- ![Game Maniaplanet](https://img.shields.io/badge/Game-Maniaplanet_4-blue) -->
 <!-- ![Game Turbo](https://img.shields.io/badge/Game-Turbo-blue) -->
