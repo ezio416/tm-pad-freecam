@@ -1,5 +1,5 @@
 // c 2024-01-22
-// m 2024-05-28
+// m 2024-07-08
 
 // everything here courtesy of "Auto-hide Opponents" plugin - https://github.com/XertroV/tm-autohide-opponents
 
@@ -12,13 +12,15 @@ bool GameVersionSafe() {
     string[] knownGood = {
         "2023-11-15_11_56",  // released 2023-11-21
         "2024-01-10_12_53",  // released 2024-01-10
-        "2024-04-30_16_52"   // released 2024-05-22
+        "2024-04-30_16_52",  // released 2024-05-22
+        "2025-07-04_14_15"   // released 2025-07-04
     };
 
     version = GetApp().SystemPlatform.ExeVersion;
 
-    if (knownGood.Find(version) > -1)
+    if (knownGood.Find(version) > -1) {
         return true;
+    }
 
     return GetStatusFromOpenplanet();
 }
@@ -30,8 +32,9 @@ bool GetStatusFromOpenplanet() {
 
     // request config for other plugin that does exactly the same thing, just me being lazy :P
     Net::HttpRequest@ req = Net::HttpGet("https://openplanet.dev/plugin/freecamspeedlimiter/config/version-compat");
-    while (!req.Finished())
+    while (!req.Finished()) {
         yield();
+    }
 
     const int code = req.ResponseCode();
     if (code != 200) {
@@ -50,15 +53,19 @@ bool GetStatusFromOpenplanet() {
                     checkingApi = false;
                     trace("GetStatusFromOpenplanet good");
                     return true;
-                }  else
+                } else {
                     warn("GetStatusFromOpenplanet warning: game version " + version + " not marked good with plugin version " + pluginVersion);
-            } else
+                }
+            } else {
                 warn("GetStatusFromOpenplanet warning: plugin version " + pluginVersion + " not specified");
-        } else
+            }
+        } else {
             warn("GetStatusFromOpenplanet error: wrong JSON type received");
+        }
 
         checkingApi = false;
         return false;
+
     } catch {
         warn("GetStatusFromOpenplanet exception: " + getExceptionInfo());
         checkingApi = false;
