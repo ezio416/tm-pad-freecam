@@ -13,6 +13,8 @@ The left stick is used to move as you normally would with the keyboard (forward/
 
 There are configuration options such as swapping controls, setting a deadzone, setting the max speed, etc. with more coming in future updates.
 
+### Note: The Summer 2025 update added this functionality into the vanilla game. However, if you don't like the way it works, you can use this plugin to override its behavior.
+
 <!-- ![Signed](https://img.shields.io/badge/Signed-School_Mode-CC1199) -->
 <!-- ![Game Maniaplanet](https://img.shields.io/badge/Game-Maniaplanet_4-blue) -->
 <!-- ![Game Turbo](https://img.shields.io/badge/Game-Turbo-blue) -->

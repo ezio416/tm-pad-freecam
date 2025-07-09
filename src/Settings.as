@@ -1,7 +1,7 @@
 // c 2024-05-28
-// m 2024-05-28
+// m 2025-07-08
 
-[Setting category="General" name="Enabled"]
+[Setting category="General" name="Enabled" description="When disabled, the vanilla controls will be active"]
 bool S_Enabled = true;
 
 [Setting category="General" name="Clamp camera pitch" description="Prevents you from turning the camera upside-down"]
