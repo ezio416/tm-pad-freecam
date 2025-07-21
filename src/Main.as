@@ -115,7 +115,7 @@ void Main() {
 
         const float cosPitch = Math::Cos(Cam.m_Pitch);
 
-        if (Math::Abs(moveForward) > S_Deadzone) {
+        if (moveForward > S_Deadzone) {
             const float factor = moveForward * moveSpeed;
 
             if (Cam.m_TargetIsEnabled) {
@@ -127,7 +127,7 @@ void Main() {
             }
         }
 
-        if (Math::Abs(moveBackward) > S_Deadzone) {
+        if (moveBackward > S_Deadzone) {
             const float factor = moveBackward * moveSpeed;
 
             if (Cam.m_TargetIsEnabled) {
