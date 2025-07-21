@@ -115,12 +115,20 @@ void Main() {
             Cam.m_FreeVal_Loc_Translation.x += moveForward * moveSpeed * Math::Sin(Cam.m_Yaw) * cosPitch;
             Cam.m_FreeVal_Loc_Translation.y += moveForward * moveSpeed * -Math::Sin(Cam.m_Pitch);
             Cam.m_FreeVal_Loc_Translation.z += moveForward * moveSpeed * Math::Cos(Cam.m_Yaw) * cosPitch;
+
+            if (Cam.m_TargetIsEnabled) {
+                Cam.m_Radius -= moveForward * moveSpeed;
+            }
         }
 
         if (Math::Abs(moveBackward) > S_Deadzone) {
             Cam.m_FreeVal_Loc_Translation.x -= moveBackward * moveSpeed * Math::Sin(Cam.m_Yaw) * cosPitch;
             Cam.m_FreeVal_Loc_Translation.y -= moveBackward * moveSpeed * -Math::Sin(Cam.m_Pitch);
             Cam.m_FreeVal_Loc_Translation.z -= moveBackward * moveSpeed * Math::Cos(Cam.m_Yaw) * cosPitch;
+
+            if (Cam.m_TargetIsEnabled) {
+                Cam.m_Radius += moveBackward * moveSpeed;
+            }
         }
     }
 }
