@@ -1,10 +1,6 @@
 // c 2024-01-22
 // m 2025-07-21
 
-// pre 2023-11-21: 0x68
-// 2023-11-21: 0x80
-const uint ActiveCamControlOffset = 0x80;
-
 float GetControlValue(CInputScriptPad@ Pad, const ControlAxis axis) {
     if (Pad is null) {
         return 0.0f;
@@ -45,6 +41,10 @@ float GetControlValue(CInputScriptPad@ Pad, const ControlAxis axis) {
             return 0.0f;
     }
 }
+
+// pre 2023-11-21: 0x68
+// 2023-11-21: 0x80
+const uint ActiveCamControlOffset = 0x80;
 
 // courtesy of "FreeCam: Show CP" plugin - https://github.com/XertroV/tm-freecam-show-cp
 CGameControlCameraFree@ GetFreeCamControls() {
