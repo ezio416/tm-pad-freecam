@@ -19,7 +19,8 @@ float S_PanMultiplier = 2.0f;
 [Setting category="General" name="Show debug window"]
 bool S_Debug = false;
 
-[Setting category="General" name="Override game version check (unsafe)" description="If you don't want to wait for the plugin author to test the current game version, try this setting. \\$FA0It may crash your game."]
+[Setting category="General" name="Override game version check (unsafe)"
+description="If you don't want to wait for the plugin author to test the current game version, try this setting. \\$FA0It may crash your game."]
 bool S_OverrideCheck = false;
 
 
