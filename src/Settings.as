@@ -1,5 +1,5 @@
 // c 2024-05-28
-// m 2025-07-08
+// m 2025-07-21
 
 [Setting category="General" name="Enabled" description="When disabled, the vanilla controls will be active"]
 bool S_Enabled = true;
@@ -16,17 +16,157 @@ float S_MoveMultiplier = 300.0f;
 [Setting category="General" name="Pan speed multiplier" min=0.0f max=10.0f]
 float S_PanMultiplier = 2.0f;
 
-[Setting category="General" name="Swap sticks" description="Makes it so left stick pans and right stick moves"]
-bool S_SwapSticks = false;
-
-[Setting category="General" name="Swap triggers" description="Makes it so left trigger (L2) moves up and right trigger (R2) moves down"]
-bool S_SwapTriggers = false;
-
-[Setting category="General" name="Invert pan up/down" description="For you flight sim enjoyers"]
-bool S_InvertY = false;
-
-[Setting category="General" name="Show debug windows"]
+[Setting category="General" name="Show debug window"]
 bool S_Debug = false;
 
-[Setting category="General" name="Override game version check (unsafe)" description="If you don't want to wait for the plugin author to test the current game version, try this setting. \\$FA0It may crash your game."]
+[Setting category="General" name="Override game version check (unsafe)"
+description="If you don't want to wait for the plugin author to test the current game version, try this setting. \\$FA0It may crash your game."]
 bool S_OverrideCheck = false;
+
+
+enum ControlAxis {
+    Left_Stick_X_Left,
+    Left_Stick_X_Right,
+    Left_Stick_Y_Up,
+    Left_Stick_Y_Down,
+    Right_Stick_X_Left,
+    Right_Stick_X_Right,
+    Right_Stick_Y_Up,
+    Right_Stick_Y_Down,
+    Left_Trigger,
+    Right_Trigger,
+    None,
+    _Count
+}
+
+[Setting category="Binds" hidden]
+ControlAxis S_MoveUp = ControlAxis::Right_Trigger;
+
+[Setting category="Binds" hidden]
+ControlAxis S_MoveDown = ControlAxis::Left_Trigger;
+
+[Setting category="Binds" hidden]
+ControlAxis S_MoveLeft = ControlAxis::Left_Stick_X_Left;
+
+[Setting category="Binds" hidden]
+ControlAxis S_MoveRight = ControlAxis::Left_Stick_X_Right;
+
+[Setting category="Binds" hidden]
+ControlAxis S_MoveForward = ControlAxis::Left_Stick_Y_Up;
+
+[Setting category="Binds" hidden]
+ControlAxis S_MoveBackward = ControlAxis::Left_Stick_Y_Down;
+
+[Setting category="Binds" hidden]
+ControlAxis S_PanUp = ControlAxis::Right_Stick_Y_Up;
+
+[Setting category="Binds" hidden]
+ControlAxis S_PanDown = ControlAxis::Right_Stick_Y_Down;
+
+[Setting category="Binds" hidden]
+ControlAxis S_PanLeft = ControlAxis::Right_Stick_X_Left;
+
+[Setting category="Binds" hidden]
+ControlAxis S_PanRight = ControlAxis::Right_Stick_X_Right;
+
+[SettingsTab icon="Gamepad" name="Binds"]
+void SettingsTab_Controls() {
+    if (UI::Button("Reset to default (plugin)")) {
+        Meta::PluginSetting@[]@ settings = pluginMeta.GetSettings();
+        for (uint i = 0; i < settings.Length; i++) {
+            if (settings[i].Category == "Binds") {
+                settings[i].Reset();
+            }
+        }
+    }
+
+    UI::SameLine();
+    if (UI::Button("Reset to default (vanilla)")) {
+        S_MoveUp       = ControlAxis::Left_Stick_Y_Up;
+        S_MoveDown     = ControlAxis::Left_Stick_Y_Down;
+        S_MoveLeft     = ControlAxis::Left_Stick_X_Left;
+        S_MoveRight    = ControlAxis::Left_Stick_X_Right;
+        S_MoveForward  = ControlAxis::Right_Trigger;
+        S_MoveBackward = ControlAxis::Left_Trigger;
+        S_PanUp        = ControlAxis::Right_Stick_Y_Up;
+        S_PanDown      = ControlAxis::Right_Stick_Y_Down;
+        S_PanLeft      = ControlAxis::Right_Stick_X_Left;
+        S_PanRight     = ControlAxis::Right_Stick_X_Right;
+    }
+
+    UI::SeparatorText("Movement");
+    S_MoveUp       = ShowCombo(S_MoveUp,       Icons::ArrowCircleUp    + " Up##move");
+    S_MoveDown     = ShowCombo(S_MoveDown,     Icons::ArrowCircleDown  + " Down##move");
+    S_MoveLeft     = ShowCombo(S_MoveLeft,     Icons::ArrowCircleLeft  + " Left##move");
+    S_MoveRight    = ShowCombo(S_MoveRight,    Icons::ArrowCircleRight + " Right##move");
+    S_MoveForward  = ShowCombo(S_MoveForward,  Icons::ArrowCircleOUp   + " Forward##move");
+    S_MoveBackward = ShowCombo(S_MoveBackward, Icons::ArrowCircleODown + " Backward##move");
+
+    UI::SeparatorText("Panning");
+    S_PanUp    = ShowCombo(S_PanUp,    Icons::ArrowCircleUp    + " Up##pan");
+    S_PanDown  = ShowCombo(S_PanDown,  Icons::ArrowCircleDown  + " Down##pan");
+    S_PanLeft  = ShowCombo(S_PanLeft,  Icons::ArrowCircleLeft  + " Left##pan");
+    S_PanRight = ShowCombo(S_PanRight, Icons::ArrowCircleRight + " Right##pan");
+}
+
+void ClearControlsWithAxis(const ControlAxis axis) {
+    if (S_MoveUp == axis) {
+        S_MoveUp = ControlAxis::None;
+    }
+
+    if (S_MoveDown == axis) {
+        S_MoveDown = ControlAxis::None;
+    }
+
+    if (S_MoveLeft == axis) {
+        S_MoveLeft = ControlAxis::None;
+    }
+
+    if (S_MoveRight == axis) {
+        S_MoveRight = ControlAxis::None;
+    }
+
+    if (S_MoveForward == axis) {
+        S_MoveForward = ControlAxis::None;
+    }
+
+    if (S_MoveBackward == axis) {
+        S_MoveBackward = ControlAxis::None;
+    }
+
+    if (S_PanUp == axis) {
+        S_PanUp = ControlAxis::None;
+    }
+
+    if (S_PanDown == axis) {
+        S_PanDown = ControlAxis::None;
+    }
+
+    if (S_PanLeft == axis) {
+        S_PanLeft = ControlAxis::None;
+    }
+
+    if (S_PanRight == axis) {
+        S_PanRight = ControlAxis::None;
+    }
+}
+
+ControlAxis ShowCombo(ControlAxis setting, const string&in label) {
+    if (UI::BeginCombo(
+        label,
+        (setting == ControlAxis::None ? "\\$F00" : "") + tostring(setting),
+        UI::ComboFlags::HeightLargest
+    )) {
+        for (int i = 0; i < ControlAxis::_Count; i++) {
+            ControlAxis axis = ControlAxis(i);
+            if (UI::Selectable(tostring(axis), setting == axis)) {
+                ClearControlsWithAxis(axis);
+                setting = axis;
+            }
+        }
+
+        UI::EndCombo();
+    }
+
+    return setting;
+}
