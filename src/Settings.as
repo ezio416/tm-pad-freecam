@@ -94,6 +94,8 @@ void SettingsTab_Controls() {
         S_PanRight     = ControlAxis::Right_Stick_X_Pos;
     }
 
+    UI::TextWrapped("Note: for the sticks, 'X negative' means left and 'Y negative' means up");
+
     UI::SeparatorText("Movement");
     S_MoveUp       = ShowCombo(S_MoveUp,       Icons::ArrowCircleUp    + " Up##move");
     S_MoveDown     = ShowCombo(S_MoveDown,     Icons::ArrowCircleDown  + " Down##move");
