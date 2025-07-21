@@ -11,6 +11,8 @@ void RenderDebug() {
 
     if (UI::Begin(pluginTitle + "\\$888 (debug)", S_Debug, UI::WindowFlags::AlwaysAutoResize | UI::WindowFlags::NoFocusOnAppearing)) {
         GetApp().SystemConfig.InputsDisableFreeCamPadControl = !UI::Checkbox("Vanilla controls enabled", !GetApp().SystemConfig.InputsDisableFreeCamPadControl);
+        UI::SameLine();
+        UI::Text("\\$888(Does not disable plugin's controls)");
 
         UI::BeginDisabled(Cam is null);
         if (UI::TreeNode(Icons::Camera + " Camera" + (Cam is null ? "\\$888 (null)" : ""))) {
