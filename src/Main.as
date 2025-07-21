@@ -100,34 +100,42 @@ void Main() {
         }
 
         if (moveLeft > S_Deadzone) {
-            Cam.m_FreeVal_Loc_Translation.x -= moveLeft * moveSpeed * Math::Sin(Cam.m_Yaw - halfPi);
-            Cam.m_FreeVal_Loc_Translation.z -= moveLeft * moveSpeed * Math::Cos(Cam.m_Yaw - halfPi);
+            const float factor = moveLeft * moveSpeed;
+
+            Cam.m_FreeVal_Loc_Translation.x -= factor * Math::Sin(Cam.m_Yaw - halfPi);
+            Cam.m_FreeVal_Loc_Translation.z -= factor * Math::Cos(Cam.m_Yaw - halfPi);
         }
 
         if (moveRight > S_Deadzone) {
-            Cam.m_FreeVal_Loc_Translation.x += moveRight * moveSpeed * Math::Sin(Cam.m_Yaw - halfPi);
-            Cam.m_FreeVal_Loc_Translation.z += moveRight * moveSpeed * Math::Cos(Cam.m_Yaw - halfPi);
+            const float factor = moveRight * moveSpeed;
+
+            Cam.m_FreeVal_Loc_Translation.x += factor * Math::Sin(Cam.m_Yaw - halfPi);
+            Cam.m_FreeVal_Loc_Translation.z += factor * Math::Cos(Cam.m_Yaw - halfPi);
         }
 
         const float cosPitch = Math::Cos(Cam.m_Pitch);
 
         if (Math::Abs(moveForward) > S_Deadzone) {
-            Cam.m_FreeVal_Loc_Translation.x += moveForward * moveSpeed * Math::Sin(Cam.m_Yaw) * cosPitch;
-            Cam.m_FreeVal_Loc_Translation.y += moveForward * moveSpeed * -Math::Sin(Cam.m_Pitch);
-            Cam.m_FreeVal_Loc_Translation.z += moveForward * moveSpeed * Math::Cos(Cam.m_Yaw) * cosPitch;
+            const float factor = moveForward * moveSpeed;
 
             if (Cam.m_TargetIsEnabled) {
-                Cam.m_Radius -= moveForward * moveSpeed;
+                Cam.m_Radius -= factor;
+            } else {
+                Cam.m_FreeVal_Loc_Translation.x += factor * Math::Sin(Cam.m_Yaw) * cosPitch;
+                Cam.m_FreeVal_Loc_Translation.y += factor * -Math::Sin(Cam.m_Pitch);
+                Cam.m_FreeVal_Loc_Translation.z += factor * Math::Cos(Cam.m_Yaw) * cosPitch;
             }
         }
 
         if (Math::Abs(moveBackward) > S_Deadzone) {
-            Cam.m_FreeVal_Loc_Translation.x -= moveBackward * moveSpeed * Math::Sin(Cam.m_Yaw) * cosPitch;
-            Cam.m_FreeVal_Loc_Translation.y -= moveBackward * moveSpeed * -Math::Sin(Cam.m_Pitch);
-            Cam.m_FreeVal_Loc_Translation.z -= moveBackward * moveSpeed * Math::Cos(Cam.m_Yaw) * cosPitch;
+            const float factor = moveBackward * moveSpeed;
 
             if (Cam.m_TargetIsEnabled) {
-                Cam.m_Radius += moveBackward * moveSpeed;
+                Cam.m_Radius += factor;
+            } else {
+                Cam.m_FreeVal_Loc_Translation.x -= factor * Math::Sin(Cam.m_Yaw) * cosPitch;
+                Cam.m_FreeVal_Loc_Translation.y -= factor * -Math::Sin(Cam.m_Pitch);
+                Cam.m_FreeVal_Loc_Translation.z -= factor * Math::Cos(Cam.m_Yaw) * cosPitch;
             }
         }
     }
