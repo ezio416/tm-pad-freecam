@@ -1,5 +1,5 @@
 // c 2024-01-22
-// m 2024-07-08
+// m 2024-07-21
 
 // everything here courtesy of "Auto-hide Opponents" plugin - https://github.com/XertroV/tm-autohide-opponents
 
@@ -8,14 +8,14 @@ string version;
 bool   versionSafe        = false;
 uint   versionSafeRetries = 0;
 
-bool GameVersionSafe() {
-    string[] knownGood = {
-        "2023-11-15_11_56",  // released 2023-11-21
-        "2024-01-10_12_53",  // released 2024-01-10
-        "2024-04-30_16_52",  // released 2024-05-22
-        "2025-07-04_14_15"   // released 2025-07-04
-    };
+const string[] knownGood = {
+    "2023-11-15_11_56",  // released 2023-11-21
+    "2024-01-10_12_53",  // released 2024-01-10
+    "2024-04-30_16_52",  // released 2024-05-22
+    "2025-07-04_14_15"   // released 2025-07-04
+};
 
+bool GameVersionSafe() {
     version = GetApp().SystemPlatform.ExeVersion;
 
     if (knownGood.Find(version) > -1) {
@@ -45,11 +45,14 @@ bool GetStatusFromOpenplanet() {
 
     try {
         const string pluginVersion = Meta::ExecutingPlugin().Version;
-        const Json::Value@ response = Json::Parse(req.String());
+        const Json::Value@ response = req.Json();
 
         if (response.GetType() == Json::Type::Object) {
             if (response.HasKey(pluginVersion)) {
-                if (response[pluginVersion].HasKey(version) && bool(response[pluginVersion][version])) {
+                if (true
+                    and response[pluginVersion].HasKey(version)
+                    and bool(response[pluginVersion][version])
+                ) {
                     checkingApi = false;
                     trace("GetStatusFromOpenplanet good");
                     return true;
