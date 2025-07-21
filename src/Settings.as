@@ -152,7 +152,11 @@ void ClearControlsWithAxis(const ControlAxis axis) {
 }
 
 ControlAxis ShowCombo(ControlAxis setting, const string&in label) {
-    if (UI::BeginCombo(label, (setting == ControlAxis::None ? "\\$F00" : "") + tostring(setting))) {
+    if (UI::BeginCombo(
+        label,
+        (setting == ControlAxis::None ? "\\$F00" : "") + tostring(setting),
+        UI::ComboFlags::HeightLargest
+    )) {
         for (int i = 0; i < ControlAxis::_Count; i++) {
             ControlAxis axis = ControlAxis(i);
             if (UI::Selectable(tostring(axis), setting == axis)) {
