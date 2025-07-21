@@ -25,14 +25,14 @@ bool S_OverrideCheck = false;
 
 
 enum ControlAxis {
-    Left_Stick_X_Neg,
-    Left_Stick_X_Pos,
-    Left_Stick_Y_Neg,
-    Left_Stick_Y_Pos,
-    Right_Stick_X_Neg,
-    Right_Stick_X_Pos,
-    Right_Stick_Y_Neg,
-    Right_Stick_Y_Pos,
+    Left_Stick_X_Left,
+    Left_Stick_X_Right,
+    Left_Stick_Y_Up,
+    Left_Stick_Y_Down,
+    Right_Stick_X_Left,
+    Right_Stick_X_Right,
+    Right_Stick_Y_Up,
+    Right_Stick_Y_Down,
     Left_Trigger,
     Right_Trigger,
     None,
@@ -46,28 +46,28 @@ ControlAxis S_MoveUp = ControlAxis::Right_Trigger;
 ControlAxis S_MoveDown = ControlAxis::Left_Trigger;
 
 [Setting category="Binds" hidden]
-ControlAxis S_MoveLeft = ControlAxis::Left_Stick_X_Neg;
+ControlAxis S_MoveLeft = ControlAxis::Left_Stick_X_Left;
 
 [Setting category="Binds" hidden]
-ControlAxis S_MoveRight = ControlAxis::Left_Stick_X_Pos;
+ControlAxis S_MoveRight = ControlAxis::Left_Stick_X_Right;
 
 [Setting category="Binds" hidden]
-ControlAxis S_MoveForward = ControlAxis::Left_Stick_Y_Neg;
+ControlAxis S_MoveForward = ControlAxis::Left_Stick_Y_Up;
 
 [Setting category="Binds" hidden]
-ControlAxis S_MoveBackward = ControlAxis::Left_Stick_Y_Pos;
+ControlAxis S_MoveBackward = ControlAxis::Left_Stick_Y_Down;
 
 [Setting category="Binds" hidden]
-ControlAxis S_PanUp = ControlAxis::Right_Stick_Y_Neg;
+ControlAxis S_PanUp = ControlAxis::Right_Stick_Y_Up;
 
 [Setting category="Binds" hidden]
-ControlAxis S_PanDown = ControlAxis::Right_Stick_Y_Pos;
+ControlAxis S_PanDown = ControlAxis::Right_Stick_Y_Down;
 
 [Setting category="Binds" hidden]
-ControlAxis S_PanLeft = ControlAxis::Right_Stick_X_Neg;
+ControlAxis S_PanLeft = ControlAxis::Right_Stick_X_Left;
 
 [Setting category="Binds" hidden]
-ControlAxis S_PanRight = ControlAxis::Right_Stick_X_Pos;
+ControlAxis S_PanRight = ControlAxis::Right_Stick_X_Right;
 
 [SettingsTab icon="Gamepad" name="Binds"]
 void SettingsTab_Controls() {
@@ -82,19 +82,17 @@ void SettingsTab_Controls() {
 
     UI::SameLine();
     if (UI::Button("Reset to default (vanilla)")) {
-        S_MoveUp       = ControlAxis::Left_Stick_Y_Neg;
-        S_MoveDown     = ControlAxis::Left_Stick_Y_Pos;
-        S_MoveLeft     = ControlAxis::Left_Stick_X_Neg;
-        S_MoveRight    = ControlAxis::Left_Stick_X_Pos;
+        S_MoveUp       = ControlAxis::Left_Stick_Y_Up;
+        S_MoveDown     = ControlAxis::Left_Stick_Y_Down;
+        S_MoveLeft     = ControlAxis::Left_Stick_X_Left;
+        S_MoveRight    = ControlAxis::Left_Stick_X_Right;
         S_MoveForward  = ControlAxis::Right_Trigger;
         S_MoveBackward = ControlAxis::Left_Trigger;
-        S_PanUp        = ControlAxis::Right_Stick_Y_Neg;
-        S_PanDown      = ControlAxis::Right_Stick_Y_Pos;
-        S_PanLeft      = ControlAxis::Right_Stick_X_Neg;
-        S_PanRight     = ControlAxis::Right_Stick_X_Pos;
+        S_PanUp        = ControlAxis::Right_Stick_Y_Up;
+        S_PanDown      = ControlAxis::Right_Stick_Y_Down;
+        S_PanLeft      = ControlAxis::Right_Stick_X_Left;
+        S_PanRight     = ControlAxis::Right_Stick_X_Right;
     }
-
-    UI::TextWrapped("Note: for the sticks, 'X negative' means left and 'Y negative' means up");
 
     UI::SeparatorText("Movement");
     S_MoveUp       = ShowCombo(S_MoveUp,       Icons::ArrowCircleUp    + " Up##move");

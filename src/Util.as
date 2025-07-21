@@ -11,28 +11,28 @@ float GetControlValue(CInputScriptPad@ Pad, const ControlAxis axis) {
     }
 
     switch (axis) {
-        case ControlAxis::Left_Stick_X_Neg:
+        case ControlAxis::Left_Stick_X_Left:
             return Pad.LeftStickX < 0.0f ? Math::Abs(Pad.LeftStickX) : 0.0f;
 
-        case ControlAxis::Left_Stick_X_Pos:
+        case ControlAxis::Left_Stick_X_Right:
             return Pad.LeftStickX > 0.0f ? Pad.LeftStickX : 0.0f;
 
-        case ControlAxis::Left_Stick_Y_Neg:
+        case ControlAxis::Left_Stick_Y_Up:
             return Pad.LeftStickY < 0.0f ? Math::Abs(Pad.LeftStickY) : 0.0f;
 
-        case ControlAxis::Left_Stick_Y_Pos:
+        case ControlAxis::Left_Stick_Y_Down:
             return Pad.LeftStickY > 0.0f ? Pad.LeftStickY : 0.0f;
 
-        case ControlAxis::Right_Stick_X_Neg:
+        case ControlAxis::Right_Stick_X_Left:
             return Pad.RightStickX < 0.0f ? Math::Abs(Pad.RightStickX) : 0.0f;
 
-        case ControlAxis::Right_Stick_X_Pos:
+        case ControlAxis::Right_Stick_X_Right:
             return Pad.RightStickX > 0.0f ? Pad.RightStickX : 0.0f;
 
-        case ControlAxis::Right_Stick_Y_Neg:
+        case ControlAxis::Right_Stick_Y_Up:
             return Pad.RightStickY < 0.0f ? Math::Abs(Pad.RightStickY) : 0.0f;
 
-        case ControlAxis::Right_Stick_Y_Pos:
+        case ControlAxis::Right_Stick_Y_Down:
             return Pad.RightStickY > 0.0f ? Pad.RightStickY : 0.0f;
 
         case ControlAxis::Left_Trigger:
