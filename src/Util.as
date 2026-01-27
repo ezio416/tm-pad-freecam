@@ -1,6 +1,3 @@
-// c 2024-01-22
-// m 2025-07-21
-
 float GetControlValue(CInputScriptPad@ Pad, const ControlAxis axis) {
     if (Pad is null) {
         return 0.0f;
