@@ -13,6 +13,10 @@ float S_MoveMultiplier = 300.0f;
 [Setting category="General" name="Pan speed multiplier" min=0.0f max=10.0f]
 float S_PanMultiplier = 2.0f;
 
+[Setting category="General" name="Pad choice"
+description="Indicates order of being plugged in. 0 is the first one. Values too high will default to the latest one. Replugging devices may change order."]
+uint8 S_Pad = 0;
+
 [Setting category="General" name="Show debug window"]
 bool S_Debug = false;
 

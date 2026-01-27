@@ -73,22 +73,29 @@ void RenderDebug() {
         }
         UI::EndDisabled();
 
-        UI::BeginDisabled(Pad is null);
-        if (UI::TreeNode(Icons::Gamepad + " Gamepad" + (Pad is null ? "\\$888 (null)" : ""))) {
-            UI::BeginDisabled();
-            UI::SliderFloat("Left stick X",  Pad.LeftStickX,  -1.0f, 1.0f, "%.6f");
-            UI::SliderFloat("Left stick Y",  Pad.LeftStickY,  -1.0f, 1.0f, "%.6f");
-            UI::Separator();
-            UI::SliderFloat("Right stick X", Pad.RightStickX, -1.0f, 1.0f, "%.6f");
-            UI::SliderFloat("Right stick Y", Pad.RightStickY, -1.0f, 1.0f, "%.6f");
-            UI::Separator();
-            UI::SliderFloat("Left trigger",  Pad.L2,          0.0f, 1.0f, "%.6f");
-            UI::SliderFloat("Right trigger", Pad.R2,          0.0f, 1.0f, "%.6f");
-            UI::EndDisabled();
-
-            UI::TreePop();
+        CInputScriptPad@[] pads = GetPads();
+        for (uint i = 0; i < pads.Length; i++) {
+            RenderDebugPad(pads[i]);
         }
-        UI::EndDisabled();
     }
     UI::End();
+}
+
+void RenderDebugPad(CInputScriptPad@ Pad) {
+    UI::BeginDisabled(Pad is null);
+    if (UI::TreeNode(Icons::Gamepad + " Gamepad" + (Pad is null ? "\\$888 (null)" : " " + Pad.IdName))) {
+        UI::BeginDisabled();
+        UI::SliderFloat("Left stick X",  Pad.LeftStickX,  -1.0f, 1.0f, "%.6f");
+        UI::SliderFloat("Left stick Y",  Pad.LeftStickY,  -1.0f, 1.0f, "%.6f");
+        UI::Separator();
+        UI::SliderFloat("Right stick X", Pad.RightStickX, -1.0f, 1.0f, "%.6f");
+        UI::SliderFloat("Right stick Y", Pad.RightStickY, -1.0f, 1.0f, "%.6f");
+        UI::Separator();
+        UI::SliderFloat("Left trigger",  Pad.L2,          0.0f, 1.0f, "%.6f");
+        UI::SliderFloat("Right trigger", Pad.R2,          0.0f, 1.0f, "%.6f");
+        UI::EndDisabled();
+
+        UI::TreePop();
+    }
+    UI::EndDisabled();
 }

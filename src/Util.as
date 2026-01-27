@@ -81,29 +81,55 @@ uint16 GetMemberOffset(const string&in className, const string&in memberName) {
 }
 
 CInputScriptPad@ GetPad() {
+    CInputScriptPad@[] pads = GetPads();
+
+    for (uint i = 0; i < pads.Length; i++) {
+        int desired = S_Pad + 100;
+        if (pads[i].ControllerId == desired) {
+            return pads[i];
+        }
+    }
+
+    if (pads.Length > 0) {
+        return pads[pads.Length - 1];
+    }
+
+    return null;
+}
+
+CInputScriptPad@[] GetPads() {
     auto App = cast<CTrackMania>(GetApp());
 
     if (false
         or App.InputPort is null
         or App.InputPort.Script_Pads.Length == 0
     ) {
-        return null;
+        return {};
     }
+
+    CInputScriptPad@[] pads;
 
     for (uint i = 0; i < App.InputPort.Script_Pads.Length; i++) {
         CInputScriptPad@ Pad = App.InputPort.Script_Pads[i];
-        if (false
-            or Pad is null
-            or Pad.Type == CInputScriptPad::EPadType::Keyboard
-            or Pad.Type == CInputScriptPad::EPadType::Mouse
-        ) {
+        if (Pad is null) {
             continue;
         }
 
-        return Pad;
+        switch (Pad.Type) {
+            case CInputScriptPad::EPadType::Keyboard:
+            case CInputScriptPad::EPadType::Mouse:
+                continue;
+
+            default:
+                pads.InsertLast(Pad);
+        }
     }
 
-    return null;
+    if (pads.Length > 1) {
+        pads.SortNonConst(function(a, b) { return a.ControllerId < b.ControllerId; });
+    }
+
+    return pads;
 }
 
 void ToggleVanillaControls(const bool b) {
