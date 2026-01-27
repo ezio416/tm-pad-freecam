@@ -1,16 +1,24 @@
-// c 2025-07-20
-// m 2025-07-21
-
 void RenderDebug() {
     if (!S_Debug) {
         return;
     }
 
     CGameControlCameraFree@ Cam = GetFreeCamControls();
-    CInputScriptPad@        Pad = GetPad();
 
     if (UI::Begin(pluginTitle + "\\$888 (debug)", S_Debug, UI::WindowFlags::AlwaysAutoResize | UI::WindowFlags::NoFocusOnAppearing)) {
-        GetApp().SystemConfig.InputsDisableFreeCamPadControl = !UI::Checkbox("Vanilla controls enabled", !GetApp().SystemConfig.InputsDisableFreeCamPadControl);
+        auto App = cast<CTrackMania>(GetApp());
+
+        const bool ss = (true
+            and cast<CSmArenaClient>(App.CurrentPlayground) !is null
+            and App.CurrentPlayground.GameTerminals.Length != 1
+        );
+        if (ss) {
+            UI::Text("\\$C80Plugin is disabled for splitscreen!");
+        }
+
+        UI::BeginDisabled(ss);
+        App.SystemConfig.InputsDisableFreeCamPadControl = !UI::Checkbox("Vanilla controls enabled", !App.SystemConfig.InputsDisableFreeCamPadControl);
+        UI::EndDisabled();
         UI::SameLine();
         UI::Text("\\$888(Does not disable plugin's controls)");
 

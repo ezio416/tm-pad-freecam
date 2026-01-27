@@ -1,6 +1,3 @@
-// c 2024-05-26
-// m 2025-07-21
-
 const float   halfPi      = Math::PI * 0.5f;
 const float   twoPi       = Math::PI * 2.0f;
 const string  pluginColor = "\\$F5F";
@@ -36,7 +33,7 @@ void Main() {
         auto Playground = cast<CSmArenaClient>(App.CurrentPlayground);
         if (false
             or Playground is null
-            or Playground.GameTerminals.Length == 0
+            or Playground.GameTerminals.Length != 1  // check for splitscreen (unsupported)
             or Playground.GameTerminals[0] is null
             or Dev::GetOffsetUint16(Playground.GameTerminals[0], 0x30) == 0  // alt cam
         ) {
