@@ -1,6 +1,3 @@
-// c 2024-01-22
-// m 2024-07-21
-
 // everything here courtesy of "Auto-hide Opponents" plugin - https://github.com/XertroV/tm-autohide-opponents
 
 bool   checkingApi        = false;
@@ -12,17 +9,17 @@ const string[] knownGood = {
     "2023-11-15_11_56",  // released 2023-11-21
     "2024-01-10_12_53",  // released 2024-01-10
     "2024-04-30_16_52",  // released 2024-05-22
-    "2025-07-04_14_15"   // released 2025-07-04
+    "2025-07-04_14_15",  // released 2025-07-04
+    "2026-01-26_15_06"   // released 2026-01-27
 };
 
 bool GameVersionSafe() {
     version = GetApp().SystemPlatform.ExeVersion;
 
-    if (knownGood.Find(version) > -1) {
-        return true;
-    }
-
-    return GetStatusFromOpenplanet();
+    return false
+        or knownGood.Find(version) > -1
+        or GetStatusFromOpenplanet()
+    ;
 }
 
 bool GetStatusFromOpenplanet() {
@@ -30,8 +27,7 @@ bool GetStatusFromOpenplanet() {
 
     trace("GetStatusFromOpenplanet starting");
 
-    // request config for other plugin that does exactly the same thing, just me being lazy :P
-    Net::HttpRequest@ req = Net::HttpGet("https://openplanet.dev/plugin/freecamspeedlimiter/config/version-compat");
+    Net::HttpRequest@ req = Net::HttpGet("https://api.openplanet.dev/plugin/padfreecam/config/version-compat");
     while (!req.Finished()) {
         yield();
     }
