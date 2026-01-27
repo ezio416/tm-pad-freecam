@@ -4,6 +4,7 @@ void RenderDebug() {
     }
 
     CGameControlCameraFree@ Cam = GetFreeCamControls();
+    CInputScriptPad@        Pad = GetPad();
 
     if (UI::Begin(pluginTitle + "\\$888 (debug)", S_Debug, UI::WindowFlags::AlwaysAutoResize | UI::WindowFlags::NoFocusOnAppearing)) {
         auto App = cast<CTrackMania>(GetApp());
