@@ -1,7 +1,7 @@
-![Signed](https://img.shields.io/badge/Signed-Yes-00AA00)
-![Number of downloads](https://img.shields.io/badge/dynamic/json?query=downloads&url=https%3A%2F%2Fopenplanet.dev%2Fapi%2Fplugin%2F554&label=Downloads&color=purple)
-![Version](https://img.shields.io/badge/dynamic/json?query=version&url=https%3A%2F%2Fopenplanet.dev%2Fapi%2Fplugin%2F554&label=Version&color=red)
-![Game Trackmania](https://img.shields.io/badge/Game-Trackmania-blue)
+![](https://img.shields.io/badge/Signed-Yes-00AA00)
+![](https://img.shields.io/badge/dynamic/json?query=downloads&url=https%3A%2F%2Fopenplanet.dev%2Fapi%2Fplugin%2F554&label=Downloads&color=purple)
+![](https://img.shields.io/badge/dynamic/json?query=version&url=https%3A%2F%2Fopenplanet.dev%2Fapi%2Fplugin%2F554&label=Version&color=red)
+![](https://img.shields.io/badge/Game-TM-blue)
 
 # Pad FreeCam
 
@@ -14,9 +14,5 @@ The left stick is used to move as you normally would with the keyboard (forward/
 There are configuration options such as swapping controls, setting a deadzone, setting the max speed, etc. with more coming in future updates.
 
 ### Note: The Summer 2025 update added this functionality into the vanilla game. However, if you don't like the way it works, you can use this plugin to override its behavior.
-
-<!-- ![Signed](https://img.shields.io/badge/Signed-School_Mode-CC1199) -->
-<!-- ![Game Maniaplanet](https://img.shields.io/badge/Game-Maniaplanet_4-blue) -->
-<!-- ![Game Turbo](https://img.shields.io/badge/Game-Turbo-blue) -->
 
 ![image](images/pad-freecam.png)
